@@ -1,0 +1,825 @@
+{
+ "kind": "discovery#restDescription",
+ "etag": "\"u_zXkMELIlX4ktyNbM2XKD4vK8E/IIqeWVuWyimMuIXmUfmxKjydBOA\"",
+ "discoveryVersion": "v1",
+ "id": "conference:v1",
+ "name": "conference",
+ "version": "v1",
+ "description": "API for the Conference Central Backend application.",
+ "icons": {
+  "x16": "http://www.google.com/images/icons/product/search-16.gif",
+  "x32": "http://www.google.com/images/icons/product/search-32.gif"
+ },
+ "protocol": "rest",
+ "baseUrl": "https://josu-uda.appspot.com/_ah/api/conference/v1/",
+ "basePath": "/_ah/api/conference/v1/",
+ "rootUrl": "https://josu-uda.appspot.com/_ah/api/",
+ "servicePath": "conference/v1/",
+ "batchPath": "batch",
+ "parameters": {
+  "alt": {
+   "type": "string",
+   "description": "Data format for the response.",
+   "default": "json",
+   "enum": [
+    "json"
+   ],
+   "enumDescriptions": [
+    "Responses with Content-Type of application/json"
+   ],
+   "location": "query"
+  },
+  "fields": {
+   "type": "string",
+   "description": "Selector specifying which fields to include in a partial response.",
+   "location": "query"
+  },
+  "key": {
+   "type": "string",
+   "description": "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token.",
+   "location": "query"
+  },
+  "oauth_token": {
+   "type": "string",
+   "description": "OAuth 2.0 token for the current user.",
+   "location": "query"
+  },
+  "prettyPrint": {
+   "type": "boolean",
+   "description": "Returns response with indentations and line breaks.",
+   "default": "true",
+   "location": "query"
+  },
+  "quotaUser": {
+   "type": "string",
+   "description": "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters. Overrides userIp if both are provided.",
+   "location": "query"
+  },
+  "userIp": {
+   "type": "string",
+   "description": "IP address of the site where the request originates. Use this if you want to enforce per-user limits.",
+   "location": "query"
+  }
+ },
+ "auth": {
+  "oauth2": {
+   "scopes": {
+    "https://www.googleapis.com/auth/userinfo.email": {
+     "description": "View your email address"
+    }
+   }
+  }
+ },
+ "schemas": {
+  "Announcement": {
+   "id": "Announcement",
+   "type": "object",
+   "properties": {
+    "message": {
+     "type": "string"
+    }
+   }
+  },
+  "Conference": {
+   "id": "Conference",
+   "type": "object",
+   "properties": {
+    "city": {
+     "type": "string"
+    },
+    "description": {
+     "type": "string"
+    },
+    "endDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "id": {
+     "type": "string",
+     "format": "int64"
+    },
+    "maxAttendees": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "month": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "name": {
+     "type": "string"
+    },
+    "organizerDisplayName": {
+     "type": "string"
+    },
+    "seatsAvailable": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "startDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "topics": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "websafeKey": {
+     "type": "string"
+    }
+   }
+  },
+  "ConferenceCollection": {
+   "id": "ConferenceCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Conference"
+     }
+    }
+   }
+  },
+  "ConferenceForm": {
+   "id": "ConferenceForm",
+   "type": "object",
+   "properties": {
+    "city": {
+     "type": "string"
+    },
+    "description": {
+     "type": "string"
+    },
+    "endDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "maxAttendees": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "name": {
+     "type": "string"
+    },
+    "startDate": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "topics": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "ConferenceQueryForm": {
+   "id": "ConferenceQueryForm",
+   "type": "object",
+   "properties": {
+    "filters": {
+     "type": "array",
+     "items": {
+      "$ref": "Filter"
+     }
+    }
+   }
+  },
+  "FeaturedSpeaker": {
+   "id": "FeaturedSpeaker",
+   "type": "object",
+   "properties": {
+    "featuredSpeaker": {
+     "type": "string"
+    },
+    "sessionNames": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   }
+  },
+  "Field": {
+   "id": "Field",
+   "type": "string",
+   "enum": [
+    "CITY",
+    "MAX_ATTENDEES",
+    "MONTH",
+    "TOPIC"
+   ],
+   "enumDescriptions": [
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  "Filter": {
+   "id": "Filter",
+   "type": "object",
+   "properties": {
+    "field": {
+     "$ref": "Field"
+    },
+    "operator": {
+     "$ref": "Operator"
+    },
+    "value": {
+     "type": "string"
+    }
+   }
+  },
+  "Operator": {
+   "id": "Operator",
+   "type": "string",
+   "enum": [
+    "EQ",
+    "GT",
+    "GTEQ",
+    "LT",
+    "LTEQ",
+    "NE"
+   ],
+   "enumDescriptions": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  "Profile": {
+   "id": "Profile",
+   "type": "object",
+   "properties": {
+    "conferenceKeysToAttend": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "displayName": {
+     "type": "string"
+    },
+    "mainEmail": {
+     "type": "string"
+    },
+    "sessionKeysWishlist": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "teeShirtSize": {
+     "$ref": "TeeShirtSize"
+    },
+    "userId": {
+     "type": "string"
+    }
+   }
+  },
+  "ProfileForm": {
+   "id": "ProfileForm",
+   "type": "object",
+   "properties": {
+    "displayName": {
+     "type": "string"
+    },
+    "teeShirtSize": {
+     "$ref": "TeeShirtSize"
+    }
+   }
+  },
+  "Session": {
+   "id": "Session",
+   "type": "object",
+   "properties": {
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "duration": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "highlights": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "name": {
+     "type": "string"
+    },
+    "speaker": {
+     "type": "string"
+    },
+    "startTime": {
+     "type": "string"
+    },
+    "typeOfSession": {
+     "$ref": "TypeOfSession"
+    },
+    "websafeKey": {
+     "type": "string"
+    }
+   }
+  },
+  "SessionCollection": {
+   "id": "SessionCollection",
+   "type": "object",
+   "properties": {
+    "items": {
+     "type": "array",
+     "items": {
+      "$ref": "Session"
+     }
+    }
+   }
+  },
+  "SessionForm": {
+   "id": "SessionForm",
+   "type": "object",
+   "properties": {
+    "date": {
+     "type": "string",
+     "format": "date-time"
+    },
+    "duration": {
+     "type": "integer",
+     "format": "int32"
+    },
+    "highlights": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    },
+    "name": {
+     "type": "string"
+    },
+    "speaker": {
+     "type": "string"
+    },
+    "startTime": {
+     "type": "string"
+    },
+    "typeOfSession": {
+     "$ref": "TypeOfSession"
+    }
+   }
+  },
+  "TeeShirtSize": {
+   "id": "TeeShirtSize",
+   "type": "string",
+   "enum": [
+    "L",
+    "M",
+    "NOT_SPECIFIED",
+    "S",
+    "XL",
+    "XS",
+    "XXL",
+    "XXXL"
+   ],
+   "enumDescriptions": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  "TypeOfSession": {
+   "id": "TypeOfSession",
+   "type": "string",
+   "enum": [
+    "KEYNOTE",
+    "LECTURE",
+    "NOT_SPECIFIED",
+    "WORKSHOP"
+   ],
+   "enumDescriptions": [
+    "",
+    "",
+    "",
+    ""
+   ]
+  },
+  "WrappedBoolean": {
+   "id": "WrappedBoolean",
+   "type": "object",
+   "properties": {
+    "reason": {
+     "type": "string"
+    },
+    "result": {
+     "type": "boolean"
+    }
+   }
+  },
+  "WrappedStringList": {
+   "id": "WrappedStringList",
+   "type": "object",
+   "properties": {
+    "stringList": {
+     "type": "array",
+     "items": {
+      "$ref": "_any"
+     }
+    }
+   }
+  },
+  "_any": {
+   "id": "_any",
+   "type": "any"
+  }
+ },
+ "methods": {
+  "addSessionToWishlist": {
+   "id": "conference.addSessionToWishlist",
+   "path": "addSessionToWishlist",
+   "httpMethod": "POST",
+   "parameters": {
+    "websafeSessionKey": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "websafeSessionKey"
+   ],
+   "response": {
+    "$ref": "WrappedBoolean"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "createConference": {
+   "id": "conference.createConference",
+   "path": "conference",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "ConferenceForm",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "Conference"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "createSession": {
+   "id": "conference.createSession",
+   "path": "createSession",
+   "httpMethod": "POST",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "request": {
+    "$ref": "SessionForm",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "Session"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getAnnouncement": {
+   "id": "conference.getAnnouncement",
+   "path": "announcement",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "Announcement"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getConference": {
+   "id": "conference.getConference",
+   "path": "conference/{websafeConferenceKey}",
+   "httpMethod": "GET",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "response": {
+    "$ref": "Conference"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getConferenceSessions": {
+   "id": "conference.getConferenceSessions",
+   "path": "getConferenceSessions",
+   "httpMethod": "GET",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "response": {
+    "$ref": "SessionCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getConferenceSessionsByType": {
+   "id": "conference.getConferenceSessionsByType",
+   "path": "getConferenceSessionsByType",
+   "httpMethod": "GET",
+   "parameters": {
+    "typeOfSession": {
+     "type": "string",
+     "required": true,
+     "enum": [
+      "KEYNOTE",
+      "LECTURE",
+      "NOT_SPECIFIED",
+      "WORKSHOP"
+     ],
+     "enumDescriptions": [
+      "",
+      "",
+      "",
+      ""
+     ],
+     "location": "query"
+    },
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "typeOfSession",
+    "websafeConferenceKey"
+   ],
+   "response": {
+    "$ref": "SessionCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getConferencesCreated": {
+   "id": "conference.getConferencesCreated",
+   "path": "getConferencesCreated",
+   "httpMethod": "POST",
+   "response": {
+    "$ref": "ConferenceCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getConferencesToAttend": {
+   "id": "conference.getConferencesToAttend",
+   "path": "getConferencesToAttend",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "ConferenceCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getFeaturedSpeaker": {
+   "id": "conference.getFeaturedSpeaker",
+   "path": "getFeaturedSpeaker",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "FeaturedSpeaker"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getProfile": {
+   "id": "conference.getProfile",
+   "path": "profile",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "Profile"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getSessionsBySpeaker": {
+   "id": "conference.getSessionsBySpeaker",
+   "path": "getSessionsBySpeaker",
+   "httpMethod": "GET",
+   "parameters": {
+    "speaker": {
+     "type": "string",
+     "required": true,
+     "location": "query"
+    }
+   },
+   "parameterOrder": [
+    "speaker"
+   ],
+   "response": {
+    "$ref": "SessionCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "getSessionsInWishlist": {
+   "id": "conference.getSessionsInWishlist",
+   "path": "getSessionsInWishlist",
+   "httpMethod": "GET",
+   "response": {
+    "$ref": "SessionCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "queryConferences": {
+   "id": "conference.queryConferences",
+   "path": "queryConferences",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "ConferenceQueryForm",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "ConferenceCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "queryConferences_nofilters": {
+   "id": "conference.queryConferences_nofilters",
+   "path": "queryConferences_nofilters",
+   "httpMethod": "POST",
+   "response": {
+    "$ref": "ConferenceCollection"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "registerForConference": {
+   "id": "conference.registerForConference",
+   "path": "conference/{websafeConferenceKey}/registration",
+   "httpMethod": "POST",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "response": {
+    "$ref": "WrappedBoolean"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "saveProfile": {
+   "id": "conference.saveProfile",
+   "path": "profile",
+   "httpMethod": "POST",
+   "request": {
+    "$ref": "ProfileForm",
+    "parameterName": "resource"
+   },
+   "response": {
+    "$ref": "Profile"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "unregisterFromConference": {
+   "id": "conference.unregisterFromConference",
+   "path": "conference/{websafeConferenceKey}/registration",
+   "httpMethod": "DELETE",
+   "parameters": {
+    "websafeConferenceKey": {
+     "type": "string",
+     "required": true,
+     "location": "path"
+    }
+   },
+   "parameterOrder": [
+    "websafeConferenceKey"
+   ],
+   "response": {
+    "$ref": "WrappedBoolean"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  }
+ },
+ "resources": {
+  "conferenceApi": {
+   "methods": {
+    "ownQueryOne": {
+     "id": "conference.conferenceApi.ownQueryOne",
+     "path": "ownQueryOne/{typeOfSession}",
+     "httpMethod": "POST",
+     "parameters": {
+      "typeOfSession": {
+       "type": "string",
+       "required": true,
+       "enum": [
+        "KEYNOTE",
+        "LECTURE",
+        "NOT_SPECIFIED",
+        "WORKSHOP"
+       ],
+       "enumDescriptions": [
+        "",
+        "",
+        "",
+        ""
+       ],
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "typeOfSession"
+     ],
+     "response": {
+      "$ref": "SessionCollection"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    },
+    "ownQueryTwo": {
+     "id": "conference.conferenceApi.ownQueryTwo",
+     "path": "ownQueryTwo/{highlight}",
+     "httpMethod": "POST",
+     "parameters": {
+      "highlight": {
+       "type": "string",
+       "required": true,
+       "location": "path"
+      }
+     },
+     "parameterOrder": [
+      "highlight"
+     ],
+     "request": {
+      "$ref": "WrappedStringList",
+      "parameterName": "resource"
+     },
+     "response": {
+      "$ref": "SessionCollection"
+     },
+     "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+     ]
+    }
+   }
+  }
+ }
+}
