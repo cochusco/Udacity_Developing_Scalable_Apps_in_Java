@@ -1,4 +1,6 @@
-App Engine application for the Udacity training course.
+## Final project application URLs
+- Application:	<https://josu-uda.appspot.com/#/>
+- Endpoints: <https://apis-explorer.appspot.com/apis-explorer/?base=https://josu-uda.appspot.com/_ah/api#p/>
 
 ## Products
 - [App Engine][1]
